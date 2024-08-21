@@ -1,0 +1,6 @@
+@go_horse_voos_comerciais_HostAddress = http://localhost:5225
+
+GET {{go_horse_voos_comerciais_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
