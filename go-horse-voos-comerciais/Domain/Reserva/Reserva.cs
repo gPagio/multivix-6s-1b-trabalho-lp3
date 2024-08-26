@@ -1,5 +1,3 @@
-using System.Collections;
-
 public class Reserva
 {
     public long Id { get; set; }
