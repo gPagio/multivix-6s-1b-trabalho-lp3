@@ -5,5 +5,7 @@
         void Add(Locais locais);
 
         List<Locais> GetAll();
+
+        bool ExistsByNomeIgnoreCase(string nome);
     }
 }

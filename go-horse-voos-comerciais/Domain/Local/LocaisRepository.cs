@@ -12,7 +12,12 @@ namespace go_horse_voos_comerciais.Domain.Local
 
         public List<Locais> GetAll()
         {
-            return _contexto.Locais.ToList();
+            return [.. _contexto.Locais];
+        }
+
+        public bool ExistsByNomeIgnoreCase(string nome)
+        {
+            return _contexto.Locais.Any(l => l.Nome.ToLower().Trim() == nome.ToLower().Trim());
         }
     }
 }

@@ -17,6 +17,7 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
+        builder.Services.AddSingleton<ILocaisService, LocaisService>();
 
         var app = builder.Build();
 

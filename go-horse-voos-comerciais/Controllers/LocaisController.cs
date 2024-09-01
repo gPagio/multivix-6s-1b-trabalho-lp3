@@ -8,25 +8,24 @@ namespace go_horse_voos_comerciais.Controllers
     [Route("/locais")]
     public class LocaisController : ControllerBase
     {
-        private readonly ILocaisRepository _locaisRepository;
+        private readonly ILocaisService _locaisService;
 
-        public LocaisController(ILocaisRepository locaisRepository)
+        public LocaisController(ILocaisService locaisService)
         {
-            _locaisRepository = locaisRepository ?? throw new ArgumentNullException();
+            _locaisService = locaisService ?? throw new ArgumentNullException();
         }
 
         [HttpPost]
         public IActionResult CadastrarLocais(DadosCadastroLocaisDTO dadosCadastroLocais)
         {
-            Locais local = new Locais(dadosCadastroLocais);
-            _locaisRepository.Add(local);
-            return Ok(new DadosListagemLocaisCadastradoDTO(local));
+            var local = _locaisService.CadastraLocais(dadosCadastroLocais);
+            return Ok(local);
         }
 
         [HttpGet]
         public IActionResult ListarTodosOsLocais()
         {
-            var locais = _locaisRepository.GetAll();
+            var locais = _locaisService.ListaLocaisCadastradosAsync();
             return Ok(locais);
         }
     }
