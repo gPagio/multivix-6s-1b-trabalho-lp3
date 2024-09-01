@@ -1,5 +1,6 @@
 
 using go_horse_voos_comerciais.Domain.Local;
+using go_horse_voos_comerciais.Infraestrutura.Middleware;
 
 namespace go_horse_voos_comerciais;
 
@@ -27,6 +28,8 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
         app.UseHttpsRedirection();
 

@@ -1,4 +1,6 @@
 ﻿
+using go_horse_voos_comerciais.Infraestrutura.Exceptions;
+
 namespace go_horse_voos_comerciais.Domain.Local
 {
     public class LocaisService : ILocaisService
@@ -12,7 +14,7 @@ namespace go_horse_voos_comerciais.Domain.Local
         }
         public Task<DadosListagemLocaisCadastradoDTO> CadastraLocais(DadosCadastroLocaisDTO dadosCadastroLocaisDTO)
         {
-            if (_locaisRepository.ExistsByNomeIgnoreCase(dadosCadastroLocaisDTO.Nome)) throw new Exception("Já existe um local com o nome  informado!");
+            if (_locaisRepository.ExistsByNomeIgnoreCase(dadosCadastroLocaisDTO.Nome)) throw new GhvcException("Já existe um local com o nome informado!");
             var locais = new Locais(dadosCadastroLocaisDTO);
             _locaisRepository.Add(locais);
             return Task.FromResult(new DadosListagemLocaisCadastradoDTO(locais));
