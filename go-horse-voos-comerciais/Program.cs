@@ -1,4 +1,6 @@
 
+using go_horse_voos_comerciais.Domain.Local;
+
 namespace go_horse_voos_comerciais;
 
 public class Program
@@ -13,6 +15,8 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
 
         var app = builder.Build();
 
