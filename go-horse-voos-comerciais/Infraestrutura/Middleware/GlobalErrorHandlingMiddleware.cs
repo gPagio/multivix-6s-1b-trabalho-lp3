@@ -29,7 +29,7 @@ namespace go_horse_voos_comerciais.Infraestrutura.Middleware
             string mensagem;
             var exceptionType = ex.GetType();
 
-            if (exceptionType == typeof(GhvcException))
+            if (exceptionType == typeof(GhvcValidacaoException))
             {
                 mensagem = "Erro: " + ex.Message;
                 statusCode = HttpStatusCode.BadRequest;
