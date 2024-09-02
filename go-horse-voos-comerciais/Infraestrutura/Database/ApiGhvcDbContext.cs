@@ -10,7 +10,7 @@ public class ApiGhvcDbContext : DbContext
     private static readonly string? username = Environment.GetEnvironmentVariable("GHVC_DB_USER");
     private static readonly string? password = Environment.GetEnvironmentVariable("GHVC_DB_PASSWORD");
 
-    public static readonly string? connectionString = $"Server={host};Port={port};Database={database};User Id={username};Password={password}";
+    private static readonly string? connectionString = $"Server={host};Port={port};Database={database};User Id={username};Password={password}";
 
     //Sobrescrever o metodo de configuração do banco
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql(connectionString);
