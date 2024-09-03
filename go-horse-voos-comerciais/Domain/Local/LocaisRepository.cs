@@ -21,7 +21,7 @@ namespace go_horse_voos_comerciais.Domain.Local
 
         public bool ExistsByNomeIgnoreCase(string nome)
         {
-            return _dbContext.Locais.Any(l => l.Nome.ToLower().Trim() == nome.ToLower().Trim());
+            return _dbContext.Locais.Any(local => local.Nome.ToLower().Trim() == nome.ToLower().Trim());
         }
     }
 }
