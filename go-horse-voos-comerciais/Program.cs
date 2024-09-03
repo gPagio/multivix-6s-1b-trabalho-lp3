@@ -17,6 +17,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddDbContext<ApiGhvcDbContext>();
         builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
         builder.Services.AddSingleton<ILocaisService, LocaisService>();
 
