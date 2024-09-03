@@ -19,7 +19,7 @@ public class Program
 
         builder.Services.AddDbContext<ApiGhvcDbContext>();
         builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
-        builder.Services.AddSingleton<ILocaisService, LocaisService>();
+        builder.Services.AddScoped<ILocaisService, LocaisService>();
 
         var app = builder.Build();
 
