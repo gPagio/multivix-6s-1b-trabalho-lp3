@@ -1,4 +1,5 @@
 
+using go_horse_voos_comerciais.Domain.CompanhiaOperante;
 using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Infraestrutura.Middleware;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
@@ -28,6 +29,7 @@ public class Program
 
         // Registra o serviço
         builder.Services.AddScoped<ILocaisService, LocaisService>();
+        builder.Services.AddScoped<ICompanhiasOperantesService, CompanhiasOperantesService>();
 
         var app = builder.Build();
 

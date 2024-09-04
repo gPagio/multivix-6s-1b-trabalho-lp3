@@ -3,7 +3,7 @@ using go_horse_voos_comerciais.Domain.Local;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("companhiasOperantes")]
+[Table("CompanhiasOperantes")]
 public class CompanhiasOperantes
 {
     [Key]
