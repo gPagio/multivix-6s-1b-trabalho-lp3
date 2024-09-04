@@ -1,6 +1,7 @@
 
 using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Infraestrutura.Middleware;
+using go_horse_voos_comerciais.Infraestrutura.Repositories;
 
 namespace go_horse_voos_comerciais;
 
@@ -18,7 +19,14 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddDbContext<ApiGhvcDbContext>();
+
+        // Registra o repositório genérico com o tipo da entidade específica
+        builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+        // Registra o repositório específico
         builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
+
+        // Registra o serviço
         builder.Services.AddScoped<ILocaisService, LocaisService>();
 
         var app = builder.Build();

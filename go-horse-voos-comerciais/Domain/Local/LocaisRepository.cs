@@ -1,27 +1,16 @@
 ﻿
+using go_horse_voos_comerciais.Infraestrutura.Repositories;
+
 namespace go_horse_voos_comerciais.Domain.Local
 {
-    public class LocaisRepository : ILocaisRepository
+    public class LocaisRepository : Repository<Locais>, ILocaisRepository
     {
         private readonly ApiGhvcDbContext _dbContext;
-        public LocaisRepository(ApiGhvcDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-        public void Add(Locais locais)
-        {
-            _dbContext.Locais.Add(locais);
-            _dbContext.SaveChanges();
-        }
-
-        public List<Locais> GetAll()
-        {
-            return [.. _dbContext.Locais];
-        }
+        public LocaisRepository(ApiGhvcDbContext context) : base(context) {}
 
         public bool ExistsByNomeIgnoreCase(string nome)
         {
-            return _dbContext.Locais.Any(local => local.Nome.ToLower().Trim() == nome.ToLower().Trim());
+            return ExistsBy(local => local.Nome.ToLower().Trim() == nome.ToLower().Trim());
         }
     }
 }
