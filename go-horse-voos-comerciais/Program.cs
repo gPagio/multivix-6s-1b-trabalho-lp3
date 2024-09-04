@@ -23,8 +23,8 @@ public class Program
         // Registra o repositório genérico com o tipo da entidade específica
         builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-        // Registra o repositório específico
-        builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
+        // Registra o repositório específico (apenas necessário caso o repositório tenha um método específico para a entidade)
+        //builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
 
         // Registra o serviço
         builder.Services.AddScoped<ILocaisService, LocaisService>();
