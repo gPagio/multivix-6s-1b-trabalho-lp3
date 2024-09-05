@@ -30,7 +30,7 @@ public class CompanhiasOperantesService : ICompanhiasOperantesService
         var companhiasOperantesCadastradas = _companhiasOperantesRepository.GetAll();
 
         var companhiasOperantesDTOs = companhiasOperantesCadastradas
-            .Select(companhiasoperantes => new DadosListagemCompanhiasOperantesCadastradasDTO(companhiasoperantes))
+            .Select(companhiasOperantes => new DadosListagemCompanhiasOperantesCadastradasDTO(companhiasOperantes))
             .ToList();
 
         return await Task.FromResult(companhiasOperantesDTOs);
