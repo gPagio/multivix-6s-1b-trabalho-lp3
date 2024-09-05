@@ -1,8 +1,11 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using go_horse_voos_comerciais.Domain.Cliente;
 using go_horse_voos_comerciais.Domain.CompanhiaOperante;
 using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Infraestrutura.Middleware;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
+using go_horse_voos_comerciais.Validators;
 
 namespace go_horse_voos_comerciais;
 
@@ -27,10 +30,14 @@ public class Program
         // Registra o repositório específico (apenas necessário caso o repositório tenha um método específico para a entidade)
         //builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
 
-        // Registra o serviço
+        // Registra serviços
         builder.Services.AddScoped<ILocaisService, LocaisService>();
         builder.Services.AddScoped<ICompanhiasOperantesService, CompanhiasOperantesService>();
         builder.Services.AddScoped<IClientesService, ClientesService>();
+
+        // Registra validators
+        builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+        builder.Services.AddTransient<IValidator<DadosCadastroClientesDTO>, ClienteValidator>();
 
         var app = builder.Build();
 

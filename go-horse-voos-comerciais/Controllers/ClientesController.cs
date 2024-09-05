@@ -17,7 +17,7 @@ public class ClientesController : ControllerBase
     [HttpPost]
     public IActionResult CadastraClientes(DadosCadastroClientesDTO dadosCadastroClienteDTO)
     {
-        var cliente = _clientesService.CadastraClientes(dadosCadastroClienteDTO);
+        var cliente = _clientesService.CadastraClientes(dadosCadastroClienteDTO);       
         return Ok(cliente);
     }
 
