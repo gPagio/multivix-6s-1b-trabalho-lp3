@@ -38,6 +38,7 @@ public class Program
         // Registra validators
         builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
         builder.Services.AddTransient<IValidator<DadosCadastroClientesDTO>, ClienteValidator>();
+        builder.Services.AddTransient<IValidator<DadosCadastroCompanhiasOperantesDTO>, CompanhiaOperanteValidator>();
 
         var app = builder.Build();
 
