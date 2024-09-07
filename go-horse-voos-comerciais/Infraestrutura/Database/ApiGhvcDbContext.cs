@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 public class ApiGhvcDbContext : DbContext
 {
     public DbSet<Locais> Locais { get; set; }
+    public DbSet<CompanhiasOperantes> CompanhiasOperantes { get; set; }
+    public DbSet<Clientes> Clientes { get; set; }
 
     private static readonly string? host = Environment.GetEnvironmentVariable("GHVC_DB_HOST");
     private static readonly string? port = Environment.GetEnvironmentVariable("GHVC_DB_PORT");
