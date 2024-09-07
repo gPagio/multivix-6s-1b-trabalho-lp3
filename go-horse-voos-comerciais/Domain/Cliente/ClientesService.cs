@@ -35,4 +35,20 @@ public class ClientesService : IClientesService
 
         return await Task.FromResult(clientesDTOs);
     }
+
+    public Task<DadosCadastroClientesDTO> BuscaClientePorCpf(string cpf)
+    {
+        if (_clientesRepository.ExistsBy(cliente => cliente.Cpf.Trim() == cpf))
+        {
+            var cliente = _clientesRepository.GetAll().FirstOrDefault(c => c.Cpf.Trim() == cpf.Trim());
+
+            if (cliente != null)
+            {
+                var clienteDTO = new DadosCadastroClientesDTO(cliente.Cpf, cliente.Nome, cliente.Endereco, cliente.TelefoneCelular, cliente.TelefoneFixo, cliente.Email);
+                return Task.FromResult(clienteDTO);
+            }
+        }
+
+        throw new Exception("Cliente não encontrado");
+    }
 }

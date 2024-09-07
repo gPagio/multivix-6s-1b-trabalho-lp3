@@ -9,7 +9,7 @@ public class ClientesController : ControllerBase
 {
     private readonly IClientesService _clientesService;
 
-    public ClientesController (IClientesService clientesService)
+    public ClientesController(IClientesService clientesService)
     {
         _clientesService = clientesService ?? throw new ArgumentNullException();
     }
@@ -17,7 +17,7 @@ public class ClientesController : ControllerBase
     [HttpPost]
     public IActionResult CadastraClientes(DadosCadastroClientesDTO dadosCadastroClienteDTO)
     {
-        var cliente = _clientesService.CadastraClientes(dadosCadastroClienteDTO);       
+        var cliente = _clientesService.CadastraClientes(dadosCadastroClienteDTO);
         return Ok(cliente);
     }
 
@@ -26,5 +26,12 @@ public class ClientesController : ControllerBase
     {
         var clientes = _clientesService.ListaClientesCadastradosAsync();
         return Ok(clientes);
+    }
+
+    [HttpGet("{cpf}")]
+    public IActionResult ConsultaClientePorCpf(string cpf)
+    {
+        var cliente = _clientesService.BuscaClientePorCpf(cpf);
+        return Ok(cliente);
     }
 }
