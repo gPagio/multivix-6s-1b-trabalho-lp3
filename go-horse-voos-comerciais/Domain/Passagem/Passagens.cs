@@ -1,4 +1,4 @@
-public class Passagem 
+public class Passagens
 {
     public long Id { get; set;}
     public long IdReserva { get; set;}
