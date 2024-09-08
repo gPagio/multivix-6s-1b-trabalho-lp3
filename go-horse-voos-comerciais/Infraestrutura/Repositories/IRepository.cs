@@ -5,4 +5,5 @@ public interface IRepository<T> where T : class
     void Add(T entity);
     List<T> GetAll();
     bool ExistsBy(Func<T, bool> predicate);
+    T GetById(long id);
 }

@@ -1,4 +1,6 @@
-﻿namespace go_horse_voos_comerciais.Infraestrutura.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace go_horse_voos_comerciais.Infraestrutura.Repositories;
 
 public class Repository<T> : IRepository<T> where T : class
 {
@@ -23,5 +25,10 @@ public class Repository<T> : IRepository<T> where T : class
     public bool ExistsBy(Func<T, bool> predicate)
     {
         return _context.Set<T>().Any(predicate);
+    }
+
+    public T GetById(long id)
+    {
+        return _context.Set<T>().FirstOrDefault(entity => EF.Property<long>(entity, "Id") == id);
     }
 }
