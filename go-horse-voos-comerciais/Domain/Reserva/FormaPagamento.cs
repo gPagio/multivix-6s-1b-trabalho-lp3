@@ -1,6 +1,9 @@
-public enum FormaPagamento 
+namespace go_horse_voos_comerciais.Domain.Reserva
 {
-    Cartao,
-    Transferencia,
-    Dinheiro
+    public enum FormaPagamento
+    {
+        CARTAO,
+        TRANSFERENCIA,
+        DINHEIRO
+    }
 }

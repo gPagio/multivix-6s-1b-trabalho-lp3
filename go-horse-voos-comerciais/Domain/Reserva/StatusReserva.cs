@@ -1,5 +1,8 @@
-public enum StatusReserva
+namespace go_horse_voos_comerciais.Domain.Reserva
 {
-    Confirmada,
-    Cancelada
+    public enum StatusReserva
+    {
+        CONFIRMADA,
+        CANCELADA
+    }
 }

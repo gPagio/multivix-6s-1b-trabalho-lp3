@@ -1,5 +1,8 @@
-public enum SituacaoCheckIn
+namespace go_horse_voos_comerciais.Domain.Passagem
 {
-    Realizado,
-    NaoRealizado
+    public enum SituacaoCheckIn
+    {
+        REALIZADO,
+        NAO_REALIZADO
+    }
 }
