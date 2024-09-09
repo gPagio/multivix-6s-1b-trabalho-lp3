@@ -16,11 +16,19 @@ public class RelatorioController : ControllerBase
     }
 
     // TODO: armazenar o json 
-    [HttpGet]
+    [HttpGet("ocupacao")]
     public IActionResult ConsultaRelatorioOcupacao (DateTime dataInicio, DateTime dataFim)
     {
         var relatorioOcupacaoDTO = _relatoriosService.GeraRelatorioOcupacao(dataInicio, dataFim);
         string jsonString = JsonSerializer.Serialize(relatorioOcupacaoDTO);
+        return Ok(jsonString);
+    }
+
+    [HttpGet("vendas")]
+    public IActionResult ConsultaRelatorioVendas(int mes, int ano)
+    {
+        var relatorioVendasDTO = _relatoriosService.GeraRelatorioVendas(mes, ano);
+        string jsonString = JsonSerializer.Serialize(relatorioVendasDTO);
         return Ok(jsonString);
     }
 }
