@@ -1,3 +1,5 @@
+using go_horse_voos_comerciais.Domain.Passagem;
+
 public class Passagens
 {
     public long Id { get; set;}
