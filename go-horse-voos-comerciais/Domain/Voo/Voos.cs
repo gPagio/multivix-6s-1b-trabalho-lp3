@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace go_horse_voos_comerciais.Domain.Voo;
 [Table("voos")]
-public class Voo 
+public class Voos 
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -31,9 +31,9 @@ public class Voo
     [Column("quantiade_assentos")]
     public int QuantidadeAssentos { get; set; }
 
-    public Voo() { }
+    public Voos() { }
 
-    public Voo (DadosCadastroVooDTO dadosCadastroVooDTO)
+    public Voos (DadosCadastroVooDTO dadosCadastroVooDTO)
     {
         this.IdOrigem = dadosCadastroVooDTO.IdOrigem;
         this.IdDestino = dadosCadastroVooDTO .IdDestino;
