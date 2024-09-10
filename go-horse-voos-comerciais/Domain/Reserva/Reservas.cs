@@ -1,7 +1,11 @@
+using go_horse_voos_comerciais.Domain.Passagem;
+using go_horse_voos_comerciais.Domain.Voo;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace go_horse_voos_comerciais.Domain.Reserva;
+
+[Table("reservas")]
 public class Reservas
 {
     [Key]
@@ -22,8 +26,9 @@ public class Reservas
     [Column("id_voo")]
     public long IdVoo { get; set; }
 
-    [Column("id")]
-    public List<Passagens>? PassagemList { get; set;}
+    public Voos Voo { get; set; }
+
+    public ICollection<Passagens>? Passagens { get; set;}
 
     [EnumDataType(typeof(StatusReserva))]
     [Column("status")]
