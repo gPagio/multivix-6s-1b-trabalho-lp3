@@ -1,4 +1,5 @@
 ﻿using go_horse_voos_comerciais.Domain.Reserva;
+using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace go_horse_voos_comerciais.Controllers;
@@ -15,8 +16,12 @@ public class ReservaController : Controller
     }
 
     [HttpPost]
-    public IActionResult CadastraReserva([FromQuery] long idVoo, [FromQuery] string cpfCliente, [FromQuery] FormaPagamento formaPagamento, [FromQuery] int quantidadeAssentosDesejados)
+    public IActionResult CadastraReserva(long? idVoo, string cpfCliente, FormaPagamento? formaPagamento, int? quantidadeAssentosDesejados)
     {
+        if (!idVoo.HasValue) throw new GhvcValidacaoException("O id do voo é obrigatório para esta ação!");
+        if (String.IsNullOrEmpty(cpfCliente)) throw new GhvcValidacaoException("O cpf do cliente é obrigatório para esta ação!");
+        if (!formaPagamento.HasValue) throw new GhvcValidacaoException("A forma de pagamento é obrigatória para esta ação!");
+        if (!quantidadeAssentosDesejados.HasValue) throw new GhvcValidacaoException("A quantidade de assentos desejados é obrigatória para esta ação!");
         return Ok(_reservasService.CadastraReserva(idVoo, cpfCliente, formaPagamento, quantidadeAssentosDesejados));
     }
 }
