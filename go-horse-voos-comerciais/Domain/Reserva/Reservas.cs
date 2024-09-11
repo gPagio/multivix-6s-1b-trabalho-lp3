@@ -35,4 +35,13 @@ public class Reservas
     public StatusReserva Status { get; set; }
 
     public Reservas() { }
+
+    public Reservas(long idVoo, long idCliente, FormaPagamento formaPagamento)
+    {
+        this.IdCliente = idCliente;
+        this.DataReserva = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+        this.FormaPagamento = formaPagamento;
+        this.IdVoo = idVoo;
+        this.Status = StatusReserva.CONFIRMADA;
+    }
 }
