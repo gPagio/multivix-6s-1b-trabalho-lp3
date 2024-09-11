@@ -23,4 +23,13 @@ public class Passagens
     [EnumDataType(typeof(StatusReserva))]
     [Column("checkin")]
     public SituacaoCheckIn CheckIn { get; set;}
+
+    public Passagens() { }
+
+    public Passagens(long idReserva)
+    {
+        this.IdReserva = idReserva;
+        this.NumeroAssento = 0;
+        this.CheckIn = SituacaoCheckIn.NAO_REALIZADO;
+    }
 }
