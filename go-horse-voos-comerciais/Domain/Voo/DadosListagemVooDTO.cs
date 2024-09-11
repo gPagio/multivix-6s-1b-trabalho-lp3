@@ -12,6 +12,7 @@ public record DadosListagemVooDTO(
     [NotNull] double Preco,
     [NotNull] int QuantidadeAssentos) {
 
+
     public DadosListagemVooDTO (Voos voo) : this (voo.Id,
                                                   voo.IdOrigem,
                                                   voo.IdDestino,

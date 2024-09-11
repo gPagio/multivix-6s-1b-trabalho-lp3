@@ -35,6 +35,7 @@ public class Voos
 
     public ICollection<Reservas>? Reservas { get; set; }
 
+
     public Voos() { }
 
     public Voos (DadosCadastroVooDTO dadosCadastroVooDTO)
