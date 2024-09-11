@@ -13,10 +13,10 @@ public class ReservaController : Controller
     {
         _reservasService = reservasService;
     }
-    
-    public IActionResult CadastraReserva()
+
+    [HttpPost]
+    public IActionResult CadastraReserva([FromQuery] long idVoo, [FromQuery] string cpfCliente, [FromQuery] FormaPagamento formaPagamento, [FromQuery] int quantidadeAssentosDesejados)
     {
-        
-        return null;
+        return Ok(_reservasService.CadastraReserva(idVoo, cpfCliente, formaPagamento, quantidadeAssentosDesejados));
     }
 }
