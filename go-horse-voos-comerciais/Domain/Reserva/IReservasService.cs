@@ -2,6 +2,6 @@
 
 public interface IReservasService
 {
-    Task<Reservas> CadastraReserva(long idVoo, int quantidadeAssentos);
-    Task<Reservas> CancelaReserva(long idReserva);
+    Task<DadosListagemReservasDTO> CadastraReserva(long idVoo, string cpfCliente, FormaPagamento formaPagamento, int quantidadeAssentosDesejados);
+    Task<DadosListagemReservasDTO> CancelaReserva(long idReserva);
 }
