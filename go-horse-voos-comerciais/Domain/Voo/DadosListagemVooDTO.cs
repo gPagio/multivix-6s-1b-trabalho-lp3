@@ -12,8 +12,13 @@ public record DadosListagemVooDTO(
     [NotNull] double Preco,
     [NotNull] int QuantidadeAssentos) {
 
-    public DadosListagemVooDTO (Voos voo) : this (voo.Id, voo.IdOrigem, voo.IdDestino, voo.DataIda, voo.DataVolta, voo.IdCompanhiaOperante, voo.Preco, voo.QuantidadeAssentos ) 
-    {
-    }
 
+    public DadosListagemVooDTO (Voos voo) : this (voo.Id,
+                                                  voo.IdOrigem,
+                                                  voo.IdDestino,
+                                                  voo.DataIda,
+                                                  voo.DataVolta,
+                                                  voo.IdCompanhiaOperante,
+                                                  voo.Preco,
+                                                  voo.QuantidadeAssentos ) { }
 }

@@ -1,7 +1,5 @@
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
-using go_horse_voos_comerciais.Migrations;
-using Microsoft.AspNetCore.Mvc;
 
 namespace go_horse_voos_comerciais.Domain.Voo;
 

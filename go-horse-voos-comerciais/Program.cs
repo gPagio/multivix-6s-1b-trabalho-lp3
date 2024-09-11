@@ -4,6 +4,8 @@ using go_horse_voos_comerciais.Domain.Cliente;
 using go_horse_voos_comerciais.Domain.CompanhiaOperante;
 using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Domain.Relatorios;
+using go_horse_voos_comerciais.Domain.Passagem;
+using go_horse_voos_comerciais.Domain.Reserva;
 using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Middleware;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
@@ -26,18 +28,20 @@ public class Program
 
         builder.Services.AddDbContext<ApiGhvcDbContext>();
 
-        // Registra o repositÛrio genÈrico com o tipo da entidade especÌfica
+        // Registra o reposit√≥rio gen√©rico com o tipo da entidade espec√≠fica
         builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-        // Registra o repositÛrio especÌfico (apenas necess·rio caso o repositÛrio tenha um mÈtodo especÌfico para a entidade)
+        // Registra o reposit√≥rio espec√≠fico (apenas necess√°rio caso o reposit√≥rio tenha um m√©todo espec√≠fico para a entidade)
         //builder.Services.AddTransient<ILocaisRepository, LocaisRepository>();
 
-        // Registra serviÁos
+        // Registra servi√ßos
         builder.Services.AddScoped<ILocaisService, LocaisService>();
         builder.Services.AddScoped<ICompanhiasOperantesService, CompanhiasOperantesService>();
         builder.Services.AddScoped<IClientesService, ClientesService>();
         builder.Services.AddScoped<IVoosService, VoosService>();
         builder.Services.AddScoped<IRelatoriosService, RelatoriosService>();
+        builder.Services.AddScoped<IReservasService, ReservasService>();
+        builder.Services.AddScoped<IPassagensService, PassagensService>();
 
         // Registra validators
         builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();

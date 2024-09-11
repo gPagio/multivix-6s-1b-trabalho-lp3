@@ -1,3 +1,5 @@
+using go_horse_voos_comerciais.Domain.Passagem;
+using go_horse_voos_comerciais.Domain.Reserva;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,6 +32,9 @@ public class Voos
 
     [Column("quantiade_assentos")]
     public int QuantidadeAssentos { get; set; }
+
+    public ICollection<Reservas>? Reservas { get; set; }
+
 
     public Voos() { }
 

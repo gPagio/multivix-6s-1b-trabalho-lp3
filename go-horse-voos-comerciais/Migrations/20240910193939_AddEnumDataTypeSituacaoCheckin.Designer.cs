@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace go_horse_voos_comerciais.Migrations
 {
     [DbContext(typeof(ApiGhvcDbContext))]
-    partial class ApiGhvcDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240910193939_AddEnumDataTypeSituacaoCheckin")]
+    partial class AddEnumDataTypeSituacaoCheckin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +102,7 @@ namespace go_horse_voos_comerciais.Migrations
                     b.ToTable("locais");
                 });
 
-            modelBuilder.Entity("go_horse_voos_comerciais.Domain.Passagem.Passagens", b =>
+            modelBuilder.Entity("Passagens", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,12 +161,10 @@ namespace go_horse_voos_comerciais.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdVoo");
-
                     b.ToTable("reservas");
                 });
 
-            modelBuilder.Entity("go_horse_voos_comerciais.Domain.Voo.Voos", b =>
+            modelBuilder.Entity("go_horse_voos_comerciais.Domain.Voo.Voo", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,7 +206,7 @@ namespace go_horse_voos_comerciais.Migrations
                     b.ToTable("voos");
                 });
 
-            modelBuilder.Entity("go_horse_voos_comerciais.Domain.Passagem.Passagens", b =>
+            modelBuilder.Entity("Passagens", b =>
                 {
                     b.HasOne("go_horse_voos_comerciais.Domain.Reserva.Reservas", "Reserva")
                         .WithMany("Passagens")
@@ -218,23 +219,7 @@ namespace go_horse_voos_comerciais.Migrations
 
             modelBuilder.Entity("go_horse_voos_comerciais.Domain.Reserva.Reservas", b =>
                 {
-                    b.HasOne("go_horse_voos_comerciais.Domain.Voo.Voos", "Voo")
-                        .WithMany("Reservas")
-                        .HasForeignKey("IdVoo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Voo");
-                });
-
-            modelBuilder.Entity("go_horse_voos_comerciais.Domain.Reserva.Reservas", b =>
-                {
                     b.Navigation("Passagens");
-                });
-
-            modelBuilder.Entity("go_horse_voos_comerciais.Domain.Voo.Voos", b =>
-                {
-                    b.Navigation("Reservas");
                 });
 #pragma warning restore 612, 618
         }
