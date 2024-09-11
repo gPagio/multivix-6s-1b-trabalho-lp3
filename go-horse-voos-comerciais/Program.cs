@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using go_horse_voos_comerciais.Domain.Cliente;
 using go_horse_voos_comerciais.Domain.CompanhiaOperante;
 using go_horse_voos_comerciais.Domain.Local;
+using go_horse_voos_comerciais.Domain.Passagem;
 using go_horse_voos_comerciais.Domain.Reserva;
 using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Middleware;
@@ -38,6 +39,7 @@ public class Program
         builder.Services.AddScoped<IClientesService, ClientesService>();
         builder.Services.AddScoped<IVoosService, VoosService>();
         builder.Services.AddScoped<IReservasService, ReservasService>();
+        builder.Services.AddScoped<IPassagensService, PassagensService>();
 
         // Registra validators
         builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
