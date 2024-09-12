@@ -3,4 +3,5 @@
 public interface IPassagensService
 {
     List<Passagens> GerarPassagens(long idReserva, int quantidadeAssentosDesejados);
+    void RealizarCheckIn(long idPassagem, int numeroAssentoDesejado);
 }
