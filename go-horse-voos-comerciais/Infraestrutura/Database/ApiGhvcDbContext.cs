@@ -31,11 +31,29 @@ public class ApiGhvcDbContext : DbContext
             .HasForeignKey(voo => voo.IdVoo)
             .HasPrincipalKey(voo => voo.Id);
 
+        modelBuilder.Entity<Voos>()
+            .HasOne(voo => voo.LocalOrigem)
+            .WithMany(local => local.VoosOrigem)
+            .HasForeignKey(voo => voo.IdOrigem)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Voos>()
+            .HasOne(voo => voo.LocalDestino)
+            .WithMany(local => local.VoosDestino)
+            .HasForeignKey(voo => voo.IdDestino)
+            .OnDelete(DeleteBehavior.Restrict);
+
         modelBuilder.Entity<Reservas>()
             .HasMany(reserva => reserva.Passagens)
             .WithOne(reserva => reserva.Reserva)
             .HasForeignKey(reserva => reserva.IdReserva)
             .HasPrincipalKey(reserva => reserva.Id);
+
+        modelBuilder.Entity<Reservas>()
+            .HasOne(reserva => reserva.Cliente)
+            .WithMany(cliente => cliente.Reservas)
+            .HasForeignKey(reserva => reserva.IdCliente)
+            .HasPrincipalKey(cliente => cliente.Id);
 
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql(connectionString);

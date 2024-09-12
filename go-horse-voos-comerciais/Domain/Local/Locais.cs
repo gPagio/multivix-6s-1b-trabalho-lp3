@@ -1,3 +1,4 @@
+using go_horse_voos_comerciais.Domain.Voo;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,10 +15,11 @@ public class Locais
     [Column("nome")]
     public string? Nome { get; private set; }
 
-    public Locais()
-    {
+    public ICollection<Voos> VoosOrigem { get; set; }
 
-    }
+    public ICollection<Voos> VoosDestino { get; set; }
+
+    public Locais() { }
 
     public Locais(DadosCadastroLocaisDTO dadosCadastroLocais)
     {

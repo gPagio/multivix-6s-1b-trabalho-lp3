@@ -1,3 +1,4 @@
+using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Domain.Passagem;
 using go_horse_voos_comerciais.Domain.Reserva;
 using System.ComponentModel.DataAnnotations;
@@ -15,8 +16,12 @@ public class Voos
     [Column("id_origem")]
     public long IdOrigem { get; set; }
 
+    public Locais LocalOrigem { get; set; }
+
     [Column("id_destino")]
     public long IdDestino { get; set; }
+
+    public Locais LocalDestino { get; set; }
 
     [Column("data_ida")]
     public DateTime DataIda { get; set; }
@@ -34,7 +39,6 @@ public class Voos
     public int QuantidadeAssentosTotal { get; set; }
 
     public ICollection<Reservas>? Reservas { get; set; }
-
 
     public Voos() { }
 

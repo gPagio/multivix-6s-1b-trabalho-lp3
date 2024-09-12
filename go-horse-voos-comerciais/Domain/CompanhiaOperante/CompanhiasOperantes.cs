@@ -17,10 +17,7 @@ public class CompanhiasOperantes
     [Column("nome")]
     public string? Nome { get; set; }
 
-    public CompanhiasOperantes()
-    {
-
-    }
+    public CompanhiasOperantes() { }
 
     public CompanhiasOperantes(DadosCadastroCompanhiasOperantesDTO dadosCadastroCompanhiasOperantes)
     {

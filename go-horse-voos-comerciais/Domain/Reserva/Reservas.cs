@@ -1,3 +1,4 @@
+using go_horse_voos_comerciais.Domain.Cliente;
 using go_horse_voos_comerciais.Domain.Passagem;
 using go_horse_voos_comerciais.Domain.Voo;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,8 @@ public class Reservas
 
     [Column("id_cliente")]
     public long IdCliente { get; set; }
+
+    public Clientes Cliente { get; set; }
 
     [Column("data_reserva")]
     public DateTime DataReserva { get; set; }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace go_horse_voos_comerciais.Migrations
 {
     [DbContext(typeof(ApiGhvcDbContext))]
-    partial class ApiGhvcDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240912224148_RelacionamentosRestantesTabelaVoos")]
+    partial class RelacionamentosRestantesTabelaVoos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,8 +161,6 @@ namespace go_horse_voos_comerciais.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCliente");
-
                     b.HasIndex("IdVoo");
 
                     b.ToTable("reservas");
@@ -224,19 +225,11 @@ namespace go_horse_voos_comerciais.Migrations
 
             modelBuilder.Entity("go_horse_voos_comerciais.Domain.Reserva.Reservas", b =>
                 {
-                    b.HasOne("go_horse_voos_comerciais.Domain.Cliente.Clientes", "Cliente")
-                        .WithMany("Reservas")
-                        .HasForeignKey("IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("go_horse_voos_comerciais.Domain.Voo.Voos", "Voo")
                         .WithMany("Reservas")
                         .HasForeignKey("IdVoo")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Cliente");
 
                     b.Navigation("Voo");
                 });
@@ -258,11 +251,6 @@ namespace go_horse_voos_comerciais.Migrations
                     b.Navigation("LocalDestino");
 
                     b.Navigation("LocalOrigem");
-                });
-
-            modelBuilder.Entity("go_horse_voos_comerciais.Domain.Cliente.Clientes", b =>
-                {
-                    b.Navigation("Reservas");
                 });
 
             modelBuilder.Entity("go_horse_voos_comerciais.Domain.Local.Locais", b =>
