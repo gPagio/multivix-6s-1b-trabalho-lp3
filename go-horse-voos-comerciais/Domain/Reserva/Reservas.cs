@@ -31,8 +31,8 @@ public class Reservas
     public ICollection<Passagens>? Passagens { get; set;}
 
     [EnumDataType(typeof(StatusReserva))]
-    [Column("status")]
-    public StatusReserva Status { get; set; }
+    [Column("status_reserva")]
+    public StatusReserva StatusReserva { get; set; }
 
     public Reservas() { }
 
@@ -42,6 +42,6 @@ public class Reservas
         this.DataReserva = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
         this.FormaPagamento = formaPagamento;
         this.IdVoo = idVoo;
-        this.Status = StatusReserva.CONFIRMADA;
+        this.StatusReserva = StatusReserva.CONFIRMADA;
     }
 }

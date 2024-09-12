@@ -20,9 +20,9 @@ public class Passagens
     [Column("numero_assento")]
     public int NumeroAssento { get; set;}
 
-    [EnumDataType(typeof(StatusReserva))]
-    [Column("checkin")]
-    public SituacaoCheckIn CheckIn { get; set;}
+    [EnumDataType(typeof(SituacaoCheckIn))]
+    [Column("situacao_checkin")]
+    public SituacaoCheckIn SituacaoCheckIn { get; set;}
 
     public Passagens() { }
 
@@ -30,6 +30,6 @@ public class Passagens
     {
         this.IdReserva = idReserva;
         this.NumeroAssento = 0;
-        this.CheckIn = SituacaoCheckIn.NAO_REALIZADO;
+        this.SituacaoCheckIn = SituacaoCheckIn.NAO_REALIZADO;
     }
 }

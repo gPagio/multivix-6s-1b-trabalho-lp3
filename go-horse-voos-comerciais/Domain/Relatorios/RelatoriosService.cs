@@ -104,7 +104,7 @@ public class RelatoriosService : IRelatoriosService
 
     private int ObtemTotalReservasConfirmadas(Voos voo)
     {
-        return ObtemReservasDoVoo(voo).Count(reserva => reserva.Status == StatusReserva.CONFIRMADA);
+        return ObtemReservasDoVoo(voo).Count(reserva => reserva.StatusReserva == StatusReserva.CONFIRMADA);
     }
 
     private List<Reservas> ObtemReservasDoVoo(Voos voo)

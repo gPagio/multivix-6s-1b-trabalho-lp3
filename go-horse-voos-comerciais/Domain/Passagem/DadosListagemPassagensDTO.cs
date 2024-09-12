@@ -2,5 +2,5 @@
 
 public record DadosListagemPassagensDTO (long id, long idReserva, int numeroAssento, SituacaoCheckIn checkIn)
 {
-    public DadosListagemPassagensDTO(Passagens passagens) : this(passagens.Id, passagens.IdReserva, passagens.NumeroAssento, passagens.CheckIn) { }
+    public DadosListagemPassagensDTO(Passagens passagens) : this(passagens.Id, passagens.IdReserva, passagens.NumeroAssento, passagens.SituacaoCheckIn) { }
 }
