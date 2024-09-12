@@ -2,37 +2,42 @@
 using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace go_horse_voos_comerciais.Domain.Relatorios;
 
 public class RelatoriosService : IRelatoriosService
 {
+    private readonly ApiGhvcDbContext _context;
     private readonly IRepository<Voos> _voosRepository;
     private readonly IRepository<Reservas> _reservasRepository;
 
-    public RelatoriosService(IRepository<Voos> voosRepository, IRepository<Reservas> reservasRepository)
+    public RelatoriosService(IRepository<Voos> voosRepository, IRepository<Reservas> reservasRepository, ApiGhvcDbContext context)
     {
         _voosRepository = voosRepository;
         _reservasRepository = reservasRepository;
+        _context = context;
     }
 
+    // TODO? Mudar método para calcular ocupação baseando-se em check-ins confirmados?
     public Task<RelatorioOcupacaoDTO> GeraRelatorioOcupacao(DateTime dataInicio, DateTime dataFim)
-    { 
-        Dictionary<Voos, double> percentuaisDeOcupacao = new();
+    {
+        Dictionary<long, double> percentuaisDeOcupacao = new();
 
         var voosNoIntervalo = ObtemVoosNoIntervalo(dataInicio, dataFim);
 
-        foreach (var voo in voosNoIntervalo) 
+        foreach (var voo in voosNoIntervalo)
         {
-            int totalReservasConfirmadas = ObtemTotalReservasConfirmadas(voo);
-            double porcentagemDeOcupacao = totalReservasConfirmadas * 100.0 / voo.QuantidadeAssentosTotal;
+            int totalAssentosOcupados = ObtemTotalPassagens(voo.Id);
+            double porcentagemDeOcupacao = totalAssentosOcupados * 100.0 / voo.QuantidadeAssentosTotal;
 
-            percentuaisDeOcupacao.Add(voo, porcentagemDeOcupacao);
+            percentuaisDeOcupacao.Add(voo.Id, porcentagemDeOcupacao);
         }
 
         return Task.FromResult(new RelatorioOcupacaoDTO(percentuaisDeOcupacao));
     }
 
+    // Calcula arrecadação por voo baseando-se em passagens vendidas, independentemente do check in
     public Task<RelatorioVendasDTO> GeraRelatorioVendas(int mes, int ano)
     {
         Dictionary<long, double> totaisArrecadadosPorVoo = new();
@@ -50,16 +55,32 @@ public class RelatoriosService : IRelatoriosService
 
         foreach (var voo in voosNoIntervalo)
         {
-            int totalReservasConfirmadas = ObtemTotalReservasConfirmadas(voo);
-            double totalArrecadado = totalReservasConfirmadas * voo.Preco;
-            totaisArrecadadosPorVoo.Add(voo.Id, totalArrecadado);
+            int totalPassagensVendidas = ObtemTotalPassagens(voo.Id);
+            double totalArrecadadoNoVoo = totalPassagensVendidas * voo.Preco;
+            totaisArrecadadosPorVoo.Add(voo.Id, totalArrecadadoNoVoo);
 
-            var reservasConfirmadas = ObtemReservasDoVoo(voo);
-            totalDinheiro += reservasConfirmadas.Where(reserva => reserva.FormaPagamento == FormaPagamento.DINHEIRO).Sum(reserva => voo.Preco);
-            totalCartao += reservasConfirmadas.Where(reserva => reserva.FormaPagamento == FormaPagamento.CARTAO).Sum(reserva => voo.Preco);
-            totalTransferencia += reservasConfirmadas.Where(reserva => reserva.FormaPagamento == FormaPagamento.TRANSFERENCIA).Sum(reserva => voo.Preco);
+            var reservasConfirmadas = ObtemReservasConfirmadas(voo.Id);
 
-            totalMesConsultado += totalArrecadado;           
+            foreach (var reserva in reservasConfirmadas)
+            {
+                int passagensDaReserva = _context.Passagens.Where(passagem => passagem.IdReserva == reserva.Id).Count();
+                double valorTotalDaReserva = passagensDaReserva * voo.Preco;
+
+                switch (reserva.FormaPagamento)
+                {
+                    case FormaPagamento.CARTAO:
+                        totalCartao += valorTotalDaReserva;
+                        break;
+                    case FormaPagamento.TRANSFERENCIA:
+                        totalTransferencia += valorTotalDaReserva;
+                        break;
+                    case FormaPagamento.DINHEIRO:
+                        totalDinheiro += valorTotalDaReserva;
+                        break;
+                }
+            }
+
+            totalMesConsultado += totalArrecadadoNoVoo;
         }
 
         var mesAnterior = mes == 1 ? 12 : mes - 1;
@@ -72,9 +93,9 @@ public class RelatoriosService : IRelatoriosService
 
         foreach (var voo in voosNoMesAnterior)
         {
-            int totalReservasConfirmadasMesAnterior = ObtemTotalReservasConfirmadas(voo);
-            double totalArrecadadoMesAnterior = totalReservasConfirmadasMesAnterior * voo.Preco;
-            totalMesAnterior += totalArrecadadoMesAnterior;
+            int totalPassagensVendidas = ObtemTotalPassagens(voo.Id);
+            double totalArrecadadoNoVoo = totalPassagensVendidas * voo.Preco;
+            totalMesAnterior += totalArrecadadoNoVoo;
         }
 
         if (totalMesAnterior > 0)
@@ -102,15 +123,23 @@ public class RelatoriosService : IRelatoriosService
         return voosNoIntervalo;
     }
 
-    private int ObtemTotalReservasConfirmadas(Voos voo)
+    private IEnumerable<Reservas> ObtemReservasConfirmadas(long idVoo)
     {
-        return ObtemReservasDoVoo(voo).Count(reserva => reserva.StatusReserva == StatusReserva.CONFIRMADA);
+        var reservas = _reservasRepository.GetAll()
+                                  .Where(reserva => reserva.IdVoo == idVoo)
+                                  .ToList();
+
+        return reservas.Where(reserva => reserva.StatusReserva == StatusReserva.CONFIRMADA);
     }
 
-    private List<Reservas> ObtemReservasDoVoo(Voos voo)
+    private int ObtemTotalPassagens(long idVoo)
     {
-        return _reservasRepository.GetAll()
-                                  .Where(reserva => reserva.IdVoo == voo.Id)
-                                  .ToList();
+        return _context.Passagens
+                .FromSql($@"SELECT p.id
+                              FROM passagens p
+                              JOIN reservas r
+                                ON r.id = p.id_reserva
+                             WHERE r.id_voo = {idVoo}")
+                .Count();
     }
 }
