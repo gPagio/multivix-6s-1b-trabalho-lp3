@@ -26,6 +26,8 @@ public class ReservasService : IReservasService
 
         if (!Enum.IsDefined(typeof(FormaPagamento), formaPagamento)) throw new GhvcValidacaoException("Essa forma de pagamento não é aceita!");
 
+        if (!(quantidadeAssentosDesejados.Value > 0)) throw new GhvcValidacaoException("Uma reserva precisa ter pelo menos um assento reservado!");
+
         int quantidadeAssentosOcupados = _context.Passagens
             .FromSql($@"SELECT p.id
                           FROM passagens p
