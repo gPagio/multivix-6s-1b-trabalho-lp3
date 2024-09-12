@@ -2,6 +2,6 @@
 
 public interface IRelatoriosService
 {
-    Task<RelatorioOcupacaoDTO> GeraRelatorioOcupacao(DateTime? dataInicio, DateTime? dataFim);
-    Task<RelatorioVendasDTO> GeraRelatorioVendas(int? mes, int? ano);
+    Task<RelatorioOcupacaoDTO> GeraRelatorioOcupacao(DateTime dataInicio, DateTime dataFim);
+    Task<RelatorioVendasDTO> GeraRelatorioVendas(int mes, int ano);
 }

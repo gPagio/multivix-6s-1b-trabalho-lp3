@@ -1,6 +1,7 @@
-using go_horse_voos_comerciais.Domain.Local;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
+namespace go_horse_voos_comerciais.Domain.Local;
 
 [Table("locais")]
 public class Locais

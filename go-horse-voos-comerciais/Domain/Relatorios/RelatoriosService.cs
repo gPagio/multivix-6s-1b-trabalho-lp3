@@ -1,5 +1,4 @@
-﻿
-using go_horse_voos_comerciais.Domain.Reserva;
+﻿using go_horse_voos_comerciais.Domain.Reserva;
 using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
@@ -17,7 +16,6 @@ public class RelatoriosService : IRelatoriosService
         _reservasRepository = reservasRepository;
     }
 
-    // Aguardar a criação de reservas no banco de dados
     public Task<RelatorioOcupacaoDTO> GeraRelatorioOcupacao(DateTime dataInicio, DateTime dataFim)
     { 
         Dictionary<Voos, double> percentuaisDeOcupacao = new();
@@ -64,7 +62,6 @@ public class RelatoriosService : IRelatoriosService
             totalMesConsultado += totalArrecadado;           
         }
 
-        // Arrecadação do mês anterior
         var mesAnterior = mes == 1 ? 12 : mes - 1;
         var anoAnterior = mes == 1 ? ano - 1 : ano;
 
@@ -91,7 +88,7 @@ public class RelatoriosService : IRelatoriosService
     }
 
 
-    private List<Voos> ObtemVoosNoIntervalo(DateTime dataInicio, DateTime dataFim)
+    private List<Voos> ObtemVoosNoIntervalo(DateTime? dataInicio, DateTime? dataFim)
     {
         var voosNoIntervalo = _voosRepository.GetAll()
                                              .Where(voo => voo.DataIda >= dataInicio && voo.DataVolta <= dataFim)

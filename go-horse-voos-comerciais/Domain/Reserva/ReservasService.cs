@@ -1,4 +1,5 @@
 ﻿
+using go_horse_voos_comerciais.Domain.Cliente;
 using go_horse_voos_comerciais.Domain.Passagem;
 using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
@@ -17,7 +18,7 @@ public class ReservasService : IReservasService
         this._passagensService = passagensService;
     }
 
-    public Task<DadosListagemReservasDTO> CadastraReserva(long idVoo, string cpfCliente, FormaPagamento formaPagamento, int quantidadeAssentosDesejados)
+    public Task<DadosListagemReservasDTO> CadastraReserva(long? idVoo, string cpfCliente, FormaPagamento? formaPagamento, int? quantidadeAssentosDesejados)
     {
         Voos voo = _context.Voos.SingleOrDefault(voo => voo.Id.Equals(idVoo)) ?? throw new GhvcValidacaoException("Nenhum voo encontrado com o id fornecido!");
 
@@ -43,11 +44,11 @@ public class ReservasService : IReservasService
             throw new GhvcValidacaoException($"{s} para este voo.");
         }
 
-        Reservas reserva = new(idVoo, cliente.Id, formaPagamento);
+        Reservas reserva = new(idVoo.Value, cliente.Id, formaPagamento.Value);
         _context.Reservas.Add( reserva );
         _context.SaveChanges();
 
-        List<Passagens> passagens = _passagensService.GerarPassagens(reserva.Id, quantidadeAssentosDesejados);
+        List<Passagens> passagens = _passagensService.GerarPassagens(reserva.Id, quantidadeAssentosDesejados.Value);
         reserva.Passagens = passagens;
         _context.Passagens.AddRange(passagens);
         _context.SaveChanges();
@@ -55,7 +56,7 @@ public class ReservasService : IReservasService
         return Task.FromResult(new DadosListagemReservasDTO(reserva));
     }
 
-    public Task<DadosListagemReservasDTO> CancelaReserva(long idReserva)
+    public Task<DadosListagemReservasDTO> CancelaReserva(long? idReserva)
     {
         throw new NotImplementedException();
     }

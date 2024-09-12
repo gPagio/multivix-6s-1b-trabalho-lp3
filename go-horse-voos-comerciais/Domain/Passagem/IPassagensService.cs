@@ -1,7 +1,6 @@
-﻿namespace go_horse_voos_comerciais.Domain.Passagem
+﻿namespace go_horse_voos_comerciais.Domain.Passagem;
+
+public interface IPassagensService
 {
-    public interface IPassagensService
-    {
-        List<Passagens> GerarPassagens(long idReserva, int quantidadeAssentosDesejados);
-    }
+    List<Passagens> GerarPassagens(long idReserva, int quantidadeAssentosDesejados);
 }

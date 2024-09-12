@@ -1,8 +1,7 @@
-namespace go_horse_voos_comerciais.Domain.Passagem
+namespace go_horse_voos_comerciais.Domain.Passagem;
+
+public enum SituacaoCheckIn
 {
-    public enum SituacaoCheckIn
-    {
-        REALIZADO,
-        NAO_REALIZADO
-    }
+    REALIZADO,
+    NAO_REALIZADO
 }

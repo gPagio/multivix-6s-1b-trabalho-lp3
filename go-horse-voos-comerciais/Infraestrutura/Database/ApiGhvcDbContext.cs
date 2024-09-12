@@ -1,3 +1,6 @@
+using go_horse_voos_comerciais.Domain.Cliente;
+using go_horse_voos_comerciais.Domain.CompanhiaOperante;
+using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Domain.Passagem;
 using go_horse_voos_comerciais.Domain.Reserva;
 using go_horse_voos_comerciais.Domain.Voo;

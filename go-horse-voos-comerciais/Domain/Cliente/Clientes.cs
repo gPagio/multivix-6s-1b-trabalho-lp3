@@ -1,6 +1,7 @@
-using go_horse_voos_comerciais.Domain.Cliente;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
+namespace go_horse_voos_comerciais.Domain.Cliente;
 
 [Table("clientes")]
 public class Clientes

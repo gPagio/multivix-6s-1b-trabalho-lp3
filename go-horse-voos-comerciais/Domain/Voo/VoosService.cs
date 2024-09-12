@@ -1,3 +1,5 @@
+using go_horse_voos_comerciais.Domain.CompanhiaOperante;
+using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
 
@@ -43,22 +45,22 @@ public class VoosService : IVoosService
         return Task.FromResult(new DadosListagemVooDTO(vooCadastrado));
     }
 
-    public Task<DadosListagemVooDTO> BuscarVooPorId(long id)
+    public Task<DadosListagemVooDTO> BuscarVooPorId(long? id)
     {
         if (!_voosRepository.ExistsBy(voo => voo.Id == id)) throw new GhvcValidacaoException("Nenhum voo encontrado com o ID informado!");
-        return Task.FromResult(new DadosListagemVooDTO(_voosRepository.GetById(id)));
+        return Task.FromResult(new DadosListagemVooDTO(_voosRepository.GetById(id.Value)));
     }
 
-    public Task<List<DadosListagemVooDTO>> BuscaVooPadrao(long idOrigem, long idDestino, DateTime dataIda, DateTime? dataVolta)
+    public Task<List<DadosListagemVooDTO>> BuscaVooPadrao(long? idOrigem, long? idDestino, DateTime? dataIda, DateTime? dataVolta)
     {
         IQueryable<Voos> query = _voosRepository.GetAll().AsQueryable();
-        query = query.Where(voo => voo.IdDestino.Equals(idDestino)
-                                && voo.IdOrigem.Equals(idOrigem)
-                                && voo.DataIda.Date.Equals(dataIda));
+        query = query.Where(voo => voo.IdDestino.Equals(idDestino.Value)
+                                && voo.IdOrigem.Equals(idOrigem.Value)
+                                && voo.DataIda.Date.Equals(dataIda.Value));
 
         if (dataVolta != null)
         {
-            query = query.Where(voo => voo.DataVolta.Date.Equals(dataVolta));
+            query = query.Where(voo => voo.DataVolta.Date.Equals(dataVolta.Value));
         }
 
         List<DadosListagemVooDTO> vooEncontrado = query.Select(voo => new DadosListagemVooDTO(voo)).ToList();

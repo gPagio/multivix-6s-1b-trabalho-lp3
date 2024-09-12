@@ -1,5 +1,4 @@
 ﻿using go_horse_voos_comerciais.Domain.Local;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace go_horse_voos_comerciais.Controllers;

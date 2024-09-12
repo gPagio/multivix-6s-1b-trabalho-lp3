@@ -21,7 +21,7 @@ public class RelatorioController : ControllerBase
     {
         if (!dataInicio.HasValue) throw new GhvcValidacaoException("Data inicial é obrigatória para esta ação!");
         if (!dataFim.HasValue) throw new GhvcValidacaoException("Data final é obrigatória para esta ação!");
-        var relatorioOcupacaoDTO = _relatoriosService.GeraRelatorioOcupacao(dataInicio, dataFim);
+        var relatorioOcupacaoDTO = _relatoriosService.GeraRelatorioOcupacao(dataInicio.Value, dataFim.Value);
         string jsonString = JsonSerializer.Serialize(relatorioOcupacaoDTO);
         return Ok(jsonString);
     }
@@ -31,7 +31,7 @@ public class RelatorioController : ControllerBase
     {
         if (!mes.HasValue) throw new GhvcValidacaoException("O mês é obrigatório para esta ação!");
         if (!ano.HasValue) throw new GhvcValidacaoException("O ano é obrigatório para esta ação!");
-        var relatorioVendasDTO = _relatoriosService.GeraRelatorioVendas(mes, ano);
+        var relatorioVendasDTO = _relatoriosService.GeraRelatorioVendas(mes.Value, ano.Value);
         string jsonString = JsonSerializer.Serialize(relatorioVendasDTO);
         return Ok(jsonString);
     }

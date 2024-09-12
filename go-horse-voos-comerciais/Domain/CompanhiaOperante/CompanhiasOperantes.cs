@@ -1,7 +1,7 @@
-using go_horse_voos_comerciais.Domain.CompanhiaOperante;
-using go_horse_voos_comerciais.Domain.Local;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
+namespace go_horse_voos_comerciais.Domain.CompanhiaOperante;
 
 [Table("CompanhiasOperantes")]
 public class CompanhiasOperantes
