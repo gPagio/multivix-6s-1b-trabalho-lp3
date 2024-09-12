@@ -30,8 +30,8 @@ public class Voos
     [Column("preco")]
     public double Preco { get; set; }
 
-    [Column("quantiade_assentos")]
-    public int QuantidadeAssentos { get; set; }
+    [Column("quantidade_assentos_total")]
+    public int QuantidadeAssentosTotal { get; set; }
 
     public ICollection<Reservas>? Reservas { get; set; }
 
@@ -46,6 +46,6 @@ public class Voos
         this.DataVolta = dadosCadastroVooDTO.DataVolta;
         this.IdCompanhiaOperante = dadosCadastroVooDTO.IdCompanhiaOperante;
         this.Preco = dadosCadastroVooDTO.Preco;
-        this.QuantidadeAssentos = dadosCadastroVooDTO.QuantidadeAssentos;
+        this.QuantidadeAssentosTotal = dadosCadastroVooDTO.QuantidadeAssentosTotal;
     }
 }

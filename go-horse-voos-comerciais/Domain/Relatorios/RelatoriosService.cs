@@ -25,7 +25,7 @@ public class RelatoriosService : IRelatoriosService
         foreach (var voo in voosNoIntervalo) 
         {
             int totalReservasConfirmadas = ObtemTotalReservasConfirmadas(voo);
-            double porcentagemDeOcupacao = totalReservasConfirmadas * 100.0 / voo.QuantidadeAssentos;
+            double porcentagemDeOcupacao = totalReservasConfirmadas * 100.0 / voo.QuantidadeAssentosTotal;
 
             percentuaisDeOcupacao.Add(voo, porcentagemDeOcupacao);
         }

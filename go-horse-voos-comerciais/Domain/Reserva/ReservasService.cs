@@ -36,7 +36,7 @@ public class ReservasService : IReservasService
                          WHERE r.id_voo = {idVoo}")
             .Count();
 
-        int quantidadeAssentosDisponiveis = voo.QuantidadeAssentos - quantidadeAssentosOcupados;
+        int quantidadeAssentosDisponiveis = voo.QuantidadeAssentosTotal - quantidadeAssentosOcupados;
 
         if (quantidadeAssentosDisponiveis < quantidadeAssentosDesejados)
         {

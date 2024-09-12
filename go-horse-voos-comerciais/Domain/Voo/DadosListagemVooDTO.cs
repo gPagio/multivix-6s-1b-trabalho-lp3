@@ -20,5 +20,5 @@ public record DadosListagemVooDTO(
                                                   voo.DataVolta,
                                                   voo.IdCompanhiaOperante,
                                                   voo.Preco,
-                                                  voo.QuantidadeAssentos ) { }
+                                                  voo.QuantidadeAssentosTotal ) { }
 }

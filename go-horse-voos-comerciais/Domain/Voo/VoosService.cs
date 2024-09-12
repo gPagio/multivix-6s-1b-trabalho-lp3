@@ -24,7 +24,7 @@ public class VoosService : IVoosService
         if (dadosCadastroVooDTO.DataIda >= dadosCadastroVooDTO.DataVolta) throw new GhvcValidacaoException("A data de volta não pode ser menor ou igual a data de ida!");
         if (dadosCadastroVooDTO.IdOrigem == dadosCadastroVooDTO.IdDestino) throw new GhvcValidacaoException("O local de destino do voo deve ser diferente do local de origem!");
         if (dadosCadastroVooDTO.Preco == 0) throw new GhvcValidacaoException("O preço não pode ser igual a zero!");
-        if (dadosCadastroVooDTO.QuantidadeAssentos == 0) throw new GhvcValidacaoException("A quantidade de assentos não pode ser igual a zero!");
+        if (dadosCadastroVooDTO.QuantidadeAssentosTotal == 0) throw new GhvcValidacaoException("A quantidade de assentos não pode ser igual a zero!");
 
         if (!_locaisRepository.ExistsBy(local => local.Id.Equals(dadosCadastroVooDTO.IdOrigem))) throw new GhvcValidacaoException("Não existe um local cadastrado correspondente a origem informada!");
         if (!_locaisRepository.ExistsBy(local => local.Id.Equals(dadosCadastroVooDTO.IdDestino))) throw new GhvcValidacaoException("Não existe um local cadastrado correspondente ao destino informado!");

@@ -8,4 +8,4 @@ public record DadosCadastroVooDTO ([NotNull] long IdOrigem,
                                    [NotNull] DateTime DataVolta,
                                    [NotNull] long IdCompanhiaOperante,
                                    [NotNull] double Preco,
-                                   [NotNull] int QuantidadeAssentos) { }
+                                   [NotNull] int QuantidadeAssentosTotal) { }
