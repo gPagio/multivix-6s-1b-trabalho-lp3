@@ -33,7 +33,8 @@ public class ReservasService : IReservasService
                           FROM passagens p
                           JOIN reservas r
                             ON r.id = p.id_reserva
-                         WHERE r.id_voo = {idVoo}")
+                         WHERE r.id_voo = {idVoo}
+                           AND r.status_reserva = {StatusReserva.CONFIRMADA}")
             .Count();
 
         int quantidadeAssentosDisponiveis = voo.QuantidadeAssentosTotal - quantidadeAssentosOcupados;
@@ -58,8 +59,11 @@ public class ReservasService : IReservasService
         return Task.FromResult(new DadosListagemReservasDTO(reserva));
     }
 
-    public Task<DadosListagemReservasDTO> CancelaReserva(long? idReserva)
+    public void CancelaReserva(long? idReserva)
     {
-        throw new NotImplementedException();
+        Reservas reservasParaCancelar = _context.Reservas.SingleOrDefault(r => r.Id.Equals(idReserva)) ?? throw new GhvcValidacaoException("Nenhuma reserva encontrada com o id informado!");
+        if (reservasParaCancelar.StatusReserva.Equals(StatusReserva.CANCELADA)) throw new GhvcValidacaoException("A reserva já está cancelada!");
+        reservasParaCancelar.StatusReserva = StatusReserva.CANCELADA;
+        _context.SaveChanges();
     }
 }

@@ -1,4 +1,5 @@
-﻿using go_horse_voos_comerciais.Domain.Reserva;
+﻿using go_horse_voos_comerciais.Domain.Local;
+using go_horse_voos_comerciais.Domain.Reserva;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,5 +24,13 @@ public class ReservaController : Controller
         if (!formaPagamento.HasValue) throw new GhvcValidacaoException("A forma de pagamento é obrigatória para esta ação!");
         if (!quantidadeAssentosDesejados.HasValue) throw new GhvcValidacaoException("A quantidade de assentos desejados é obrigatória para esta ação!");
         return Ok(_reservasService.CadastraReserva(idVoo, cpfCliente, formaPagamento, quantidadeAssentosDesejados));
+    }
+
+    [HttpDelete("{idReserva}")]
+    public IActionResult CancelarReserva(long? idReserva)
+    {
+        if (!idReserva.HasValue) throw new GhvcValidacaoException("O id da reserva é obrigatório para esta operação!");
+        _reservasService.CancelaReserva(idReserva);
+        return NoContent();
     }
 }
