@@ -19,9 +19,13 @@ public class RelatoriosService : IRelatoriosService
         _context = context;
     }
 
-    // TODO? Mudar método para calcular ocupação baseando-se em check-ins confirmados?
     public Task<RelatorioOcupacaoDTO> GeraRelatorioOcupacao(DateTime dataInicio, DateTime dataFim)
     {
+        if ((dataFim - dataInicio).TotalDays != 7)
+        {
+            throw new GhvcValidacaoException("O período informado deve ser de exatamente uma semana!");
+        }
+
         Dictionary<long, double> percentuaisDeOcupacao = new();
 
         var voosNoIntervalo = ObtemVoosNoIntervalo(dataInicio, dataFim);
