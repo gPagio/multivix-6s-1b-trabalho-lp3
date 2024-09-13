@@ -19,7 +19,7 @@ public class PassagemController : ControllerBase
     {
         if (!idPassagem.HasValue) throw new GhvcValidacaoException("O id da passagem é obrigatório para essa operação!");
         if (!numeroAssentoDesejado.HasValue) throw new GhvcValidacaoException("O número do assento é obrigatório para essa operação!");
-        _passagensService.RealizarCheckIn(idPassagem.Value, numeroAssentoDesejado.Value);
-        return NoContent();
+        var bilhete = _passagensService.RealizarCheckIn(idPassagem.Value, numeroAssentoDesejado.Value);
+        return Ok(bilhete);
     }
 }

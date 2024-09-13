@@ -3,6 +3,7 @@ using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace go_horse_voos_comerciais.Domain.Relatorios;
 

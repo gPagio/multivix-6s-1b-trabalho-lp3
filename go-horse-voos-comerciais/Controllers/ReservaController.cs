@@ -2,6 +2,7 @@
 using go_horse_voos_comerciais.Domain.Reserva;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace go_horse_voos_comerciais.Controllers;
 
@@ -13,7 +14,7 @@ public class ReservaController : Controller
 
     public ReservaController(IReservasService reservasService)
     {
-        _reservasService = reservasService;
+        _reservasService = reservasService ?? throw new ArgumentNullException();
     }
 
     [HttpPost]
@@ -32,5 +33,13 @@ public class ReservaController : Controller
         if (!idReserva.HasValue) throw new GhvcValidacaoException("O id da reserva é obrigatório para esta operação!");
         _reservasService.CancelaReserva(idReserva);
         return NoContent();
+    }
+
+    [HttpGet]
+    public IActionResult ListaTodasAsReservas()
+    {
+        var reservas = _reservasService.ListaReservas();
+
+        return Ok(reservas);
     }
 }
