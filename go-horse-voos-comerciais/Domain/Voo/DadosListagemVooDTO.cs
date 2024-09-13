@@ -3,14 +3,14 @@ using System.Diagnostics.CodeAnalysis;
 namespace go_horse_voos_comerciais.Domain.Voo;
 
 public record DadosListagemVooDTO(
-    [NotNull] long id,
-    [NotNull] long IdOrigem,
-    [NotNull] long IdDestino,
-    [NotNull] DateTime DataIda,
-    [NotNull] DateTime DataVolta,
-    [NotNull] long IdCompanhiaOperante,
-    [NotNull] double Preco,
-    [NotNull] int QuantidadeAssentos) {
+    long id,
+    long IdOrigem,
+    long IdDestino,
+    DateTime DataIda,
+    DateTime DataVolta,
+    long IdCompanhiaOperante,
+    double Preco,
+    int QuantidadeAssentos) {
 
 
     public DadosListagemVooDTO (Voos voo) : this (voo.Id,
