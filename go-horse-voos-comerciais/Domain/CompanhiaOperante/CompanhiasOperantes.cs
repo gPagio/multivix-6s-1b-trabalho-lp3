@@ -21,7 +21,7 @@ public class CompanhiasOperantes
 
     public CompanhiasOperantes(DadosCadastroCompanhiasOperantesDTO dadosCadastroCompanhiasOperantes)
     {
-        this.Cnpj = dadosCadastroCompanhiasOperantes.Cnpj;
+        this.Cnpj = dadosCadastroCompanhiasOperantes.Cnpj.Trim();
         this.Nome = dadosCadastroCompanhiasOperantes.Nome.Trim();
     }
 }

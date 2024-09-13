@@ -55,6 +55,15 @@ public class ApiGhvcDbContext : DbContext
             .HasForeignKey(reserva => reserva.IdCliente)
             .HasPrincipalKey(cliente => cliente.Id);
 
+        modelBuilder.Entity<Clientes>()
+            .HasIndex(c => new { c.Cpf, c.Nome, c.Email, c.TelefoneCelular, c.TelefoneFixo }).IsUnique(true);
+
+        modelBuilder.Entity<CompanhiasOperantes>()
+            .HasIndex(co => new { co.Cnpj, co.Nome }).IsUnique(true);
+
+        modelBuilder.Entity<Locais>()
+            .HasIndex(l => l.Nome).IsUnique(true);
+
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql(connectionString);
 }

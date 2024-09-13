@@ -21,10 +21,10 @@ public class Clientes
     [Column("endereco")]
     public string? Endereco { get; set; }
     
-    [Column("telefoneCelular")]
+    [Column("telefone_celular")]
     public string? TelefoneCelular { get; set; }
     
-    [Column("telefoneFixo")]
+    [Column("telefone_fixo")]
     public string? TelefoneFixo { get; set; }
     
     [Column("email")]
@@ -36,11 +36,11 @@ public class Clientes
 
     public Clientes(DadosCadastroClientesDTO dadosCadastroClientesDTO)
     {
-        this.Cpf = dadosCadastroClientesDTO.Cpf;
-        this.Nome = dadosCadastroClientesDTO.Nome;
-        this.Endereco = dadosCadastroClientesDTO.Endereco;
-        this.TelefoneCelular = dadosCadastroClientesDTO.TelefoneCelular;
-        this.TelefoneFixo = dadosCadastroClientesDTO.TelefoneFixo;
-        this.Email = dadosCadastroClientesDTO.Email;
+        this.Cpf = dadosCadastroClientesDTO.Cpf.Trim();
+        this.Nome = dadosCadastroClientesDTO.Nome.Trim();
+        this.Endereco = dadosCadastroClientesDTO.Endereco.Trim();
+        this.TelefoneCelular = dadosCadastroClientesDTO.TelefoneCelular.Trim();
+        this.TelefoneFixo = dadosCadastroClientesDTO.TelefoneFixo.Trim();
+        this.Email = dadosCadastroClientesDTO.Email.Trim();
     }
 }
