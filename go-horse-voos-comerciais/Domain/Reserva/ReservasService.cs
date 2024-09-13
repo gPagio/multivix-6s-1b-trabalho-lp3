@@ -1,8 +1,10 @@
 ﻿
 using go_horse_voos_comerciais.Domain.Cliente;
+using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Domain.Passagem;
 using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
+using go_horse_voos_comerciais.Infraestrutura.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace go_horse_voos_comerciais.Domain.Reserva;
@@ -11,11 +13,13 @@ public class ReservasService : IReservasService
 {
     private readonly ApiGhvcDbContext _context;
     private readonly IPassagensService _passagensService;
+    private readonly IRepository<Reservas> _reservasRepository;
 
-    public ReservasService(ApiGhvcDbContext context, IPassagensService passagensService)
+    public ReservasService(ApiGhvcDbContext context, IPassagensService passagensService, IRepository<Reservas> reservasRepository)
     {
-        this._context = context;
-        this._passagensService = passagensService;
+        _context = context;
+        _passagensService = passagensService;
+        _reservasRepository = reservasRepository;
     }
 
     public Task<DadosListagemReservasDTO> CadastraReserva(long? idVoo, string cpfCliente, FormaPagamento? formaPagamento, int? quantidadeAssentosDesejados)
@@ -65,5 +69,16 @@ public class ReservasService : IReservasService
         if (reservasParaCancelar.StatusReserva.Equals(StatusReserva.CANCELADA)) throw new GhvcValidacaoException("A reserva já está cancelada!");
         reservasParaCancelar.StatusReserva = StatusReserva.CANCELADA;
         _context.SaveChanges();
+    }
+
+    public async Task<IEnumerable<DadosListagemReservasDTO>> ListaReservas()
+    {
+        var reservas = _reservasRepository.GetAll();
+
+        var reservasDTOs = reservas
+            .Select(reserva => new DadosListagemReservasDTO(reserva))
+            .ToList();
+
+        return await Task.FromResult(reservasDTOs);
     }
 }
