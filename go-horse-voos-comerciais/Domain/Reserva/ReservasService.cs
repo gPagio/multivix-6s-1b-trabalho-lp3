@@ -1,11 +1,11 @@
 ﻿
 using go_horse_voos_comerciais.Domain.Cliente;
-using go_horse_voos_comerciais.Domain.Local;
 using go_horse_voos_comerciais.Domain.Passagem;
 using go_horse_voos_comerciais.Domain.Voo;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using go_horse_voos_comerciais.Infraestrutura.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace go_horse_voos_comerciais.Domain.Reserva;
 
@@ -13,13 +13,11 @@ public class ReservasService : IReservasService
 {
     private readonly ApiGhvcDbContext _context;
     private readonly IPassagensService _passagensService;
-    private readonly IRepository<Reservas> _reservasRepository;
 
-    public ReservasService(ApiGhvcDbContext context, IPassagensService passagensService, IRepository<Reservas> reservasRepository)
+    public ReservasService(ApiGhvcDbContext context, IPassagensService passagensService)
     {
         _context = context;
         _passagensService = passagensService;
-        _reservasRepository = reservasRepository;
     }
 
     public Task<DadosListagemReservasDTO> CadastraReserva(long? idVoo, string cpfCliente, FormaPagamento? formaPagamento, int? quantidadeAssentosDesejados)
@@ -73,11 +71,15 @@ public class ReservasService : IReservasService
 
     public async Task<IEnumerable<DadosListagemReservasDTO>> ListaReservas()
     {
-        var reservas = _reservasRepository.GetAll();
+        var reservas = _context.Reservas.Include(r => r.Passagens).ToList();
 
-        var reservasDTOs = reservas
-            .Select(reserva => new DadosListagemReservasDTO(reserva))
-            .ToList();
+        List<DadosListagemReservasDTO> reservasDTOs = new();
+
+        foreach (var reserva in reservas)
+        {
+
+            reservasDTOs.Add(new DadosListagemReservasDTO(reserva));
+        }
 
         return await Task.FromResult(reservasDTOs);
     }

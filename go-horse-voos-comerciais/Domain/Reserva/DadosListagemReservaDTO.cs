@@ -18,7 +18,7 @@ namespace go_horse_voos_comerciais.Domain.Reserva
                                                                   reserva.FormaPagamento, 
                                                                   reserva.IdVoo, 
                                                                   reserva.StatusReserva,
-                                                                  reserva.Passagens.Select(p => new DadosListagemPassagensDTO(p)).ToList())
+                                                                  reserva.Passagens?.Select(p => new DadosListagemPassagensDTO(p)).ToList() ?? new List<DadosListagemPassagensDTO>())
         { }
     }
 }

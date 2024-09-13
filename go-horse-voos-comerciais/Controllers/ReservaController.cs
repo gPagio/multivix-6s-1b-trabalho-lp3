@@ -2,6 +2,7 @@
 using go_horse_voos_comerciais.Domain.Reserva;
 using go_horse_voos_comerciais.Infraestrutura.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace go_horse_voos_comerciais.Controllers;
 
@@ -38,6 +39,7 @@ public class ReservaController : Controller
     public IActionResult ListaTodasAsReservas()
     {
         var reservas = _reservasService.ListaReservas();
+
         return Ok(reservas);
     }
 }
