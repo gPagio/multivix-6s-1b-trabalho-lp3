@@ -5,29 +5,17 @@ Este é a API Go Horse Voos Comerciais, uma API que resolve questões de gerenci
 O objetivo deste desafio foi proporcionar uma experiência real no mundo do desenvolvimento a partir de uma avaliação processual (trabalho). Foi proposto para os alunos a contrução de uma `API Rest`, a qual seria o `backend` de uma aplicação que gerencia passagens para companhia de transporte aéreo realizando um `CRUD`.
 
 ## 📝 End Points
+### 🟢 Swagger
 Os end points dessa API estão mapeados com o Swagger. Para acessar esse mapeamento, rode o projeto e entre em:
 
 ```
 http://localhost:5225/swagger/index.html
 ```
 
-Dentre os end points, está listado abaixo as possibilidades disponibilizadas pelos mesmos:
+### 🐶 Bruno
+Além do Swagger, na pasta raiz do projeto existe uma pasta chamada endpoints, onde a mesma possui todos os endpoints usados para testar a API.
 
-1. Cadastrar Cliente
-1. Listar Todos os Clientes Cadastrados
-1. Listar Cliente por CPF
-1. Cadastrar Companhia Operante
-1. Listar Todas as Companhias Operantes
-1. Cadastrar Locais
-1. Listar Todos os Locais
-1. Realizar CheckIn
-1. Emitir Relatório de Ocupação
-1. Emitir Relatório de Vendas
-1. Cadastrar Reserva
-1. Cancelar Reserva
-1. Listar Voo por ID
-1. Listar Voo por ID de Origem, ID de Origem, Data de Ida e Data de Volta (Se aplicável)
-1. Cadastrar Voo
+Para fazer o uso desses arquivos intale o [`Bruno`](https://www.usebruno.com/) e importe a coleção de endpoints (pasta mencionada anteriormente) pelo botão `Open Collection`, o qual pode ser encontrado clicando em três pontinhos do lado esquerdo da tela.
 
 ## 📌 Dependências
 Para o correto funcionamento do Go Horse Voos Comerciais, é necessário realizar a instalação das dependências abaixo. Clique no hyperlink em cada uma delas para ir a respectiva página de downloads.
