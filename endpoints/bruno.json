@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "multivix-6s-1b-trabalho-lp3",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

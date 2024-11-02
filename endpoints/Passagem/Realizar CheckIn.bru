@@ -1,0 +1,16 @@
+meta {
+  name: Realizar CheckIn
+  type: http
+  seq: 1
+}
+
+put {
+  url: http://localhost:5225/passagens?idPassagem=8&numeroAssentoDesejado=1
+  body: none
+  auth: none
+}
+
+params:query {
+  idPassagem: 8
+  numeroAssentoDesejado: 1
+}

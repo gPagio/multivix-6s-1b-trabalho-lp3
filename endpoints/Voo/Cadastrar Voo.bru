@@ -1,0 +1,23 @@
+meta {
+  name: Cadastrar Voo
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:5225/voos
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "IdOrigem": 1,
+    "IdDestino": 2,
+    "DataIda": "2024-09-12T17:00:24.174Z",
+    "DataVolta": "2024-09-13T21:02:24.174Z",
+    "IdCompanhiaOperante": 1,
+    "Preco": 5,
+    "QuantidadeAssentosTotal": 3
+  }
+}

@@ -1,0 +1,18 @@
+meta {
+  name: Cadastrar Companhia Operante
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:5225/companhias-operantes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "cnpj": "22222222222222",
+    "nome": "Latão Brahma"
+  }
+}

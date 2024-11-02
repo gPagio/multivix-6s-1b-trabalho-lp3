@@ -1,0 +1,22 @@
+meta {
+  name: Cadastrar Cliente
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:5225/clientes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "cpf": "22222222222",
+    "nome": "Gustavo Haddad",
+    "endereco": "Rua do HTML, N°8",
+    "telefoneCelular": "+5528999999998",
+    "telefoneFixo": "+552835429998",
+    "email": "gustavo@gohorse.com"
+  }
+}
